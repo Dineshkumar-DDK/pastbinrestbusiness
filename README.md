@@ -29,3 +29,12 @@ app.listen(PORT, () => console.log(`Backend running on ${PORT}`));
 
 
 // code ends
+
+-replace the constants.js code with the following 
+
+export const url = {
+    HEALTHZ:'/api/healthz',
+    PASTES:'/api/pastes',
+    FETCH_PASTES:'/api/pastes/:id',
+    VIEW_PASTES:'/p/:id'
+}
