@@ -1,11 +1,11 @@
 import express from 'express';
 
 
-import { url } from './utils/constants';
-import { healthz } from './routes/health';
-import { createPaste } from './routes/createPaste';
-import { fetchPaste } from './routes/fetchPaste';
-import { viewPaste } from './routes/viewPaste';
+import { url } from './utils/constants.js';
+import { healthz } from './routes/healthz.js';
+import { createPaste } from './routes/createPaste.js';
+import { fetchPaste } from './routes/fetchPaste.js';
+import { viewPaste } from './routes/viewPaste.js';
 
 const app = express();
 app.use(express.json());
