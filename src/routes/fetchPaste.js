@@ -3,30 +3,28 @@ import { now } from '../lib/time.js';
 
 export async function fetchPaste(req, res) {
   const { id } = req.params;
-  const currentTime = now(req);
+  const currentTime = now(req); 
 
-  const paste = await prisma.$transaction(async tx => {
-    const p = await tx.paste.findUnique({ where: { id } });
-    if (!p) return null;
-
-    if (p.expiresAt && p.expiresAt <= currentTime) return null;
-    if (p.maxViews && p.viewCount >= p.maxViews) return null;
-
-    return tx.paste.update({
-      where: { id },
-      data: { viewCount: { increment: 1 } }
-    });
-  });
+  const paste = await prisma.paste.findUnique({ where: { id } });
 
   if (!paste) {
     return res.status(404).json({ error: 'Not found' });
   }
 
+  if (paste.expiresAt && paste.expiresAt.getTime() <= currentTime) {
+    return res.status(404).json({ error: 'Not found' });
+  }
+
+  if (paste.maxViews !== null && paste.viewCount >= paste.maxViews) {
+    return res.status(404).json({ error: 'Not found' });
+  }
+
   res.json({
     content: paste.content,
-    remaining_views: paste.maxViews
-      ? paste.maxViews - paste.viewCount
-      : null,
+    remaining_views:
+      paste.maxViews !== null
+        ? paste.maxViews - paste.viewCount
+        : null,
     expires_at: paste.expiresAt
   });
 }

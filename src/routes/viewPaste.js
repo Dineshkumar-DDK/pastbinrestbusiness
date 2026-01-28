@@ -7,10 +7,12 @@ export async function viewPaste(req, res) {
   const currentTime = now(req);
 
   const paste = await prisma.paste.findUnique({ where: { id } });
-
+  console.log(paste.expiresAt && paste.expiresAt.getTime() <= currentTime,
+  paste.expiresAt , paste.expiresAt.getTime(),currentTime
+     )
   if (
     !paste ||
-    (paste.expiresAt && paste.expiresAt <= currentTime) ||
+    (paste.expiresAt && paste.expiresAt.getTime() <= currentTime) ||
     (paste.maxViews && paste.viewCount >= paste.maxViews)
   ) {
     return res.status(404).send('Not found');

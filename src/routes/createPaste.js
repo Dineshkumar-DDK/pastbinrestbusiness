@@ -3,7 +3,7 @@ import { prisma } from '../lib/prisma.js';
 
 export async function createPaste(req, res) {
   const { content, ttl_seconds, max_views } = req.body;
-
+  
   if (!content || typeof content !== 'string') {
     return res.status(400).json({ error: 'Invalid content' });
   }
