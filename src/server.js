@@ -1,8 +1,9 @@
 import express from 'express';
-import { healthz } from './routes/healthz.js';
-import { createPaste } from './routes/createPaste.js';
-import { fetchPaste } from './routes/fetchPaste.js';
-import { viewPaste } from './routes/viewPaste.js';
+import { healthz } from './routes/health';
+import { createPaste } from './routes/createPaste';
+import { fetchPaste } from './routes/fetchPaste';
+import { viewPaste } from './routes/viewPaste';
+
 
 const app = express();
 app.use(express.json());
