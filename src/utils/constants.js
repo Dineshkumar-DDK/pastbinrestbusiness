@@ -1,7 +1,6 @@
-
 export const url = {
-    HEALTHZ:'/healthz',
-    PASTES:'/pastes',
-    FETCH_PASTES:'/pastes/:id',
+    HEALTHZ:'/api/healthz',
+    PASTES:'/api/pastes',
+    FETCH_PASTES:'/api/pastes/:id',
     VIEW_PASTES:'/p/:id'
 }
